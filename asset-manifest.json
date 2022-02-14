@@ -1,6 +1,6 @@
 {
   "/umi.css": "/umi.8ceda0d1.css",
-  "/umi.js": "/umi.426f2ad2.js",
+  "/umi.js": "/umi.e6e64792.js",
   "/t__plugin-layout__Layout.css": "/t__plugin-layout__Layout.6523e29e.chunk.css",
   "/t__plugin-layout__Layout.js": "/t__plugin-layout__Layout.1ba922a3.async.js",
   "/p__user__Login.css": "/p__user__Login.e7c9dfd1.chunk.css",
@@ -30,8 +30,8 @@
   "/logo.svg": "/logo.svg",
   "/icons/icon-192x192.png": "/icons/icon-192x192.png",
   "/icons/icon-128x128.png": "/icons/icon-128x128.png",
-  "/service-worker.js": "/service-worker.js",
   "/pro_icon.svg": "/pro_icon.svg",
   "/manifest.json": "/manifest.json",
+  "/service-worker.js": "/service-worker.js",
   "/CNAME": "/CNAME"
 }
