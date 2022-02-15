@@ -31,7 +31,7 @@
   "/icons/icon-192x192.png": "/icons/icon-192x192.png",
   "/icons/icon-128x128.png": "/icons/icon-128x128.png",
   "/pro_icon.svg": "/pro_icon.svg",
-  "/manifest.json": "/manifest.json",
   "/service-worker.js": "/service-worker.js",
+  "/manifest.json": "/manifest.json",
   "/CNAME": "/CNAME"
 }
