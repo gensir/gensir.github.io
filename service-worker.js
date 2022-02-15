@@ -1,37 +1,52 @@
-const g={APP_SHELL_CACHE_KEY:"app_shell",ASSET_CACHE_KEY:"assets"},assets={
-  "/umi.css": "/umi.8ceda0d1.css",
-  "/umi.js": "/umi.885994ce.js",
-  "/t__plugin-layout__Layout.css": "/t__plugin-layout__Layout.6523e29e.chunk.css",
-  "/t__plugin-layout__Layout.js": "/t__plugin-layout__Layout.19bbad25.async.js",
-  "/p__user__Login.css": "/p__user__Login.e7c9dfd1.chunk.css",
-  "/p__user__Login.js": "/p__user__Login.578d2a05.async.js",
-  "/p__404.css": "/p__404.572eeed8.chunk.css",
-  "/p__404.js": "/p__404.789b3468.async.js",
-  "/p__Welcome.css": "/p__Welcome.631625b2.chunk.css",
-  "/p__Welcome.js": "/p__Welcome.2d54586c.async.js",
-  "/p__Admin.js": "/p__Admin.ed36cbf1.async.js",
-  "/p__TableList.js": "/p__TableList.a621527c.async.js",
-  "/350.27714ff6.chunk.css": "/350.27714ff6.chunk.css",
-  "/350.849f615d.async.js": "/350.849f615d.async.js",
-  "/395.324defeb.async.js": "/395.324defeb.async.js",
-  "/799.f321cbac.async.js": "/799.f321cbac.async.js",
-  "/907.6d690c2b.async.js": "/907.6d690c2b.async.js",
-  "/820.27e368f8.chunk.css": "/820.27e368f8.chunk.css",
-  "/820.72df3378.async.js": "/820.72df3378.async.js",
-  "/242.cb83f9e7.async.js": "/242.cb83f9e7.async.js",
-  "/694.b8dd5481.chunk.css": "/694.b8dd5481.chunk.css",
-  "/694.bf0a7bff.async.js": "/694.bf0a7bff.async.js",
-  "/91.a812c815.chunk.css": "/91.a812c815.chunk.css",
-  "/91.cb1e4860.async.js": "/91.cb1e4860.async.js",
-  "/415.8501e7e1.chunk.css": "/415.8501e7e1.chunk.css",
-  "/415.6cf37ae1.async.js": "/415.6cf37ae1.async.js",
-  "/icons/icon-512x512.png": "/icons/icon-512x512.png",
-  "/favicon.ico": "/favicon.ico",
-  "/logo.svg": "/logo.svg",
-  "/manifest.json": "/manifest.json",
-  "/service-worker.js": "/service-worker.js",
-  "/icons/icon-192x192.png": "/icons/icon-192x192.png",
-  "/icons/icon-128x128.png": "/icons/icon-128x128.png",
-  "/pro_icon.svg": "/pro_icon.svg",
-  "/CNAME": "/CNAME"
-},excludeFiles=["/manifest.json","/service-worker.js","/CNAME"];self.addEventListener("install",function(s){s.waitUntil(Promise.all([caches.open(g.ASSET_CACHE_KEY).then(function(c){return console.log("Opened cache"),c.addAll(Object.values(assets).filter(n=>excludeFiles.indexOf(n)===-1))}),caches.open(g.APP_SHELL_CACHE_KEY).then(function(c){return c.addAll(["/user/login"])})]))}),addEventListener("message",s=>{console.log(`The client sent me a message: ${s.data}`),s.source.postMessage("Hi client")});
+const CACHE_NAME = 'offline';
+const OFFLINE_URL = '/index';
+
+self.addEventListener('install', function (event) {
+  console.log('[ServiceWorker] Install');
+
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    // Setting {cache: 'reload'} in the new request will ensure that the response
+    // isn't fulfilled from the HTTP cache; i.e., it will be from the network.
+    await cache.add(new Request(OFFLINE_URL, { cache: 'reload' }));
+  })());
+
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (event) => {
+  console.log('[ServiceWorker] Activate');
+  event.waitUntil((async () => {
+    // Enable navigation preload if it's supported.
+    // See https://developers.google.com/web/updates/2017/02/navigation-preload
+    if ('navigationPreload' in self.registration) {
+      await self.registration.navigationPreload.enable();
+    }
+  })());
+
+  // Tell the active service worker to take control of the page immediately.
+  self.clients.claim();
+});
+
+self.addEventListener('fetch', function (event) {
+  // console.log('[Service Worker] Fetch', event.request.url);
+  if (event.request.mode === 'navigate') {
+    event.respondWith((async () => {
+      try {
+        const preloadResponse = await event.preloadResponse;
+        if (preloadResponse) {
+          return preloadResponse;
+        }
+
+        const networkResponse = await fetch(event.request);
+        return networkResponse;
+      } catch (error) {
+        console.log('[Service Worker] Fetch failed; returning offline page instead.', error);
+
+        const cache = await caches.open(CACHE_NAME);
+        const cachedResponse = await cache.match(OFFLINE_URL);
+        return cachedResponse;
+      }
+    })());
+  }
+});
