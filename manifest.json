@@ -1,23 +1,83 @@
 {
-  "name": "zqcsApp",
-  "short_name": "zqcsApp",
+  "android_package_name": "com.zqcs.android",
+  "background_color": "#ffffff",
+  "categories": [
+    "social",
+    "news",
+    "magazines"
+  ],
+  "description": "忠情此生婚恋平台 打造线上，线下相结合的婚恋综合服务平台 依托于互联网+大数据模式 设立本地化服务中心 秉承“忠于你，钟于爱，终于家”宗旨 由成都忠情此生文化传媒有限公司 让爱不再等待 数百位团队成员以社交.婚恋为主, 引领大众自主，创业， 创新的新型模式 通过app线上数据精准匹配 精心打造的一款综合服务平台 线下专属红娘一对一服务",
   "display": "standalone",
-  "start_url": "./?utm_source=homescreen",
-  "theme_color": "#002140",
-  "scope": "/",
-  "background_color": "#001529",
+  "gcm_sender_id": "49625052041",
+  "gcm_user_visible_only": true,
   "icons": [
     {
-      "src": "icons/icon-192x192.png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "src": "icons/icon-192x192.png"
     },
     {
-      "src": "icons/icon-128x128.png",
-      "sizes": "128x128"
+      "sizes": "128x128",
+      "src": "icons/icon-128x128.png"
     },
     {
-      "src": "icons/icon-512x512.png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "src": "icons/icon-512x512.png"
     }
-  ]
+  ],
+  "launch_handler": {
+    "navigate_existing_client": "never",
+    "route_to": "existing-client"
+  },
+  "name": "zqcsApp",
+  "prefer_related_applications": true,
+  "related_applications": [
+    {
+      "id": "com.zqcs.android",
+      "platform": "chromeos_play",
+      "url": "https://zq.dywudao.com/public/android/new.apk"
+    }
+  ],
+  "scope": "/",
+  "screenshots": [
+    {
+      "sizes": "586x1041",
+      "src": "https://abs.twimg.com/responsive-web/client-web/twitter-lite-data-saver-marketing.68059865.png",
+      "type": "image/png"
+    },
+    {
+      "sizes": "586x1041",
+      "src": "https://abs.twimg.com/responsive-web/client-web/twitter-lite-explore-marketing.fd45b025.png",
+      "type": "image/png"
+    },
+    {
+      "sizes": "586x1041",
+      "src": "https://abs.twimg.com/responsive-web/client-web/twitter-lite-timeline-marketing.befcdb45.png",
+      "type": "image/png"
+    }
+  ],
+  "share_target": {
+    "action": "compose/tweet",
+    "enctype": "multipart/form-data",
+    "method": "POST",
+    "params": {
+      "files": [
+        {
+          "accept": [
+            "image/jpeg",
+            "image/png",
+            "image/gif",
+            "video/quicktime",
+            "video/mp4"
+          ],
+          "name": "externalMedia"
+        }
+      ],
+      "text": "text",
+      "title": "title",
+      "url": "url"
+    }
+  },
+  "short_name": "zqcsApp",
+  "start_url": "https://gensir.github.io/?utm_source=homescreen",
+  "theme_color": "#ffffff"
 }
