@@ -1,6 +1,6 @@
 const g={APP_SHELL_CACHE_KEY:"app_shell",ASSET_CACHE_KEY:"assets"},assets={
-  "/umi.css": "/umi.2ad8db30.css",
-  "/umi.js": "/umi.d56e2c7b.js",
+  "/umi.css": "/umi.8ceda0d1.css",
+  "/umi.js": "/umi.885994ce.js",
   "/t__plugin-layout__Layout.css": "/t__plugin-layout__Layout.6523e29e.chunk.css",
   "/t__plugin-layout__Layout.js": "/t__plugin-layout__Layout.19bbad25.async.js",
   "/p__user__Login.css": "/p__user__Login.e7c9dfd1.chunk.css",
